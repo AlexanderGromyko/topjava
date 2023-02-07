@@ -30,10 +30,7 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Integer id = 0;
-        if (request.getParameter("id") != null) {
-            id = Integer.parseInt(request.getParameter("id"));
-        }
+        Integer id = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id"));
         String action = request.getParameter("action");
         if (action == null) {
             log.debug("redirect to meals");
