@@ -28,11 +28,6 @@ public class InMemoryStorage implements Storage {
     }
 
     @Override
-    public void updateMeal(Meal meal) {
-        storage.put(meal.getId(), meal);
-    }
-
-    @Override
     public List<Meal> getAllMeals() {
         return new ArrayList<>(storage.values());
     }

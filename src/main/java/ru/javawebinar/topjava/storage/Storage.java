@@ -6,11 +6,10 @@ import java.util.List;
 
 public interface Storage {
     public Integer getNewId();
+
     public void addMeal(Meal meal);
 
     public void deleteMeal(Integer id);
-
-    public void updateMeal(Meal meal);
 
     public List<Meal> getAllMeals();
 
