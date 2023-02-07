@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
+import ru.javawebinar.topjava.storage.Storage;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
+
     public static void main(String[] args) {
         List<Meal> meals = Arrays.asList(
                 new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
@@ -41,22 +43,20 @@ public class MealsUtil {
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
-    public static List<Meal> getMeals() {
-        return Arrays.asList(
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410),
-                new Meal(LocalDateTime.of(2020, Month.FEBRUARY, 1, 9, 0), "Завтрак", 300),
-                new Meal(LocalDateTime.of(2020, Month.FEBRUARY, 1, 11, 0), "Второй завтрак", 250),
-                new Meal(LocalDateTime.of(2020, Month.FEBRUARY, 1, 14, 30), "Обед", 1000),
-                new Meal(LocalDateTime.of(2020, Month.FEBRUARY, 1, 19, 15), "Ужин", 850)
-        );
+    public static void initStorage(Storage storage) {
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2023, Month.FEBRUARY, 1, 9, 0), "Завтрак", 300));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2023, Month.FEBRUARY, 1, 11, 0), "Второй завтрак", 250));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2023, Month.FEBRUARY, 1, 14, 30), "Обед", 1000));
+        storage.addMeal(new Meal(storage.getNewId(), LocalDateTime.of(2023, Month.FEBRUARY, 1, 19, 15), "Ужин", 850));
     }
 }

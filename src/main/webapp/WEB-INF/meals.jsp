@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <html lang="ru">
@@ -13,6 +13,7 @@
     <div>
         <h2>Meal list</h2>
     </div>
+    <a href="meals?action=add">Add meal</a>
     <table>
         <tr>
             <th>Date/Time</th>
@@ -21,15 +22,15 @@
             <th></th>
             <th></th>
         </tr>
-        <c:set var="dtf" value="${DateTimeFormatter.ofPattern('yyyy.MM.dd HH:mm:ss')}" />
+        <c:set var="dtf" value="${DateTimeFormatter.ofPattern('yyyy.MM.dd HH:mm:ss')}"/>
         <c:forEach items="${meals}" var="meal">
             <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
             <tr id="${meal.excess ? "overdose" : "normal"}">
                 <td>${meal.dateTime.format(dtf)}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="">Update</a></td>
-                <td><a href="">Delete</a></td>
+                <td><a href="meals?id=${meal.id}&action=update">Update</a></td>
+                <td><a href="meals?id=${meal.id}&action=delete">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
