@@ -7,33 +7,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
-public class InMemoryStorage implements Storage {
+public class InMemoryMealStorage implements MealStorage {
     private final AtomicInteger atomicInteger = new AtomicInteger();
-    protected Map<Integer,Meal> storage = new ConcurrentHashMap<>();
+    protected Map<Integer, Meal> storage = new ConcurrentHashMap<>();
 
-    public Integer getNewId() {
+    private Integer getNewId() {
         return atomicInteger.incrementAndGet();
     }
 
     @Override
-    public void addMeal(Meal meal) {
+    public void save(Meal meal) {
+        meal.setId(meal.getId() == null ? getNewId() : meal.getId());
         storage.put(meal.getId(), meal);
     }
 
     @Override
-    public void deleteMeal(Integer id) {
+    public void delete(int id) {
         storage.remove(id);
     }
 
     @Override
-    public List<Meal> getAllMeals() {
+    public List<Meal> getAll() {
         return new ArrayList<>(storage.values());
     }
 
     @Override
-    public Meal getMeal(Integer id) {
+    public Meal get(int id) {
         return storage.get(id);
     }
 }
