@@ -2,16 +2,17 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html lang="ru">
 <head>
-    <title>Edit meal</title>
+    <title>${action} meal</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <div>
-    <h2>Edit meal</h2>
+    <h2>${action.equals("add") ? "Add meal" : "Update meal"}</h2>
 </div>
 <form method="post" action="meals" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="id" value="${meal.id}">
+    <input type="hidden" name="action" value="${action}">
     <dl>
         <dt>DateTime:</dt>
         <dd><input type="datetime-local" name="DateTime" size="50" value="${meal.dateTime}"></dd><br>
