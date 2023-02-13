@@ -21,12 +21,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
         log.debug("forward to users");
         String selectedUser = request.getParameter("selectedUser");
-        if (selectedUser != null) {
-            SecurityUtil.setAuthUserId(Integer.valueOf(selectedUser));
-            response.sendRedirect("index.html");
-        } else request.getRequestDispatcher("/users.jsp").forward(request, response);
+        SecurityUtil.setAuthUserId(Integer.parseInt(selectedUser));
+        response.sendRedirect("meals");
     }
 }

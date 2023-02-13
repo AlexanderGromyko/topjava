@@ -22,13 +22,18 @@ import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
 
 @Controller
 public class MealRestController {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     private MealService service;
 
-    public List<MealTo> getAll(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+    public List<MealTo> getAllFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         return getAll()
-                .stream().filter(m -> DateTimeUtil.isBetweenHalfOpen(m.getDateTime(), startDate.atTime(startTime), endDate.atTime(endTime)))
+                .stream().filter(m -> DateTimeUtil.isBetweenHalfOpen(m.getDate()
+                        , startDate != null ? startDate : LocalDate.MIN
+                        , endDate != null ? endDate : LocalDate.MAX)
+                        && DateTimeUtil.isBetweenHalfOpen(m.getTime()
+                        , startTime != null ? startTime : LocalTime.MIN
+                        , endTime != null ? endTime : LocalTime.MAX))
                 .collect(Collectors.toList());
     }
 

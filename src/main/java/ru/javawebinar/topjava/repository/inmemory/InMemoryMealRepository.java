@@ -5,8 +5,9 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,8 +19,13 @@ public class InMemoryMealRepository implements MealRepository {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     {
-        //userId = 1, for the first time, for tests
-        MealsUtil.meals.forEach(m -> save(m, 1));
+        // another part of meal with userId = 2
+        MealsUtil.meals.forEach(m -> {
+                    if (LocalDate.of(2023, 2, 1).compareTo(m.getDate()) > 0) {
+                        save(m, 1);
+                    } else save(m, 2);
+                }
+        );
     }
 
     @Override
@@ -56,7 +62,10 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Collection<Meal> getAll(int userId) {
-        return repository.values().stream().filter(m -> m.getUserId() == userId).sorted(Comparator.comparing(Meal::getDateTime)).collect(Collectors.toList());
+    public List<Meal> getAll(int userId) {
+        return repository.values().stream()
+                .filter(m -> m.getUserId() == userId)
+                .sorted(Comparator.comparing(Meal::getDateTime).reversed())
+                .collect(Collectors.toList());
     }
 }

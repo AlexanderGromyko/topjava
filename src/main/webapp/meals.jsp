@@ -25,11 +25,10 @@
     <br><br>
     <form method="get" action="meals">
         <input type="date" value="${startDate}" name="startDate">
-        <input type="time" value="${startTime}" name="startTime">
         <input type="date" value="${endDate}" name="endDate">
+        <input type="time" value="${startTime}" name="startTime">
         <input type="time" value="${endTime}" name="endTime">
         <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
     </form>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
