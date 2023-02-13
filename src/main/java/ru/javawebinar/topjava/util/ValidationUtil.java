@@ -1,11 +1,9 @@
 package ru.javawebinar.topjava.util;
 
-
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 public class ValidationUtil {
-
     public static <T> T checkNotFoundWithId(T object, int id) {
         checkNotFoundWithId(object != null, id);
         return object;
@@ -36,7 +34,7 @@ public class ValidationUtil {
 //      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
         if (entity.isNew()) {
             entity.setId(id);
-        } else if (entity.getId() != id) {
+        } else if (entity.getId().intValue() != id) {
             throw new IllegalArgumentException(entity + " must be with id=" + id);
         }
     }

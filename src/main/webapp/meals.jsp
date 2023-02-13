@@ -23,6 +23,14 @@
     <h2>Meals</h2>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
+    <form method="get" action="meals">
+        <input type="date" value="${startDate}" name="startDate">
+        <input type="time" value="${startTime}" name="startTime">
+        <input type="date" value="${endDate}" name="endDate">
+        <input type="time" value="${endTime}" name="endTime">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
@@ -34,7 +42,7 @@
         </tr>
         </thead>
         <c:forEach items="${requestScope.meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
             <tr class="${meal.excess ? 'excess' : 'normal'}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
