@@ -9,9 +9,8 @@ public class SecurityUtil {
         return userId;
     }
 
-    public static int setAuthUserId(int userId) {
+    public static void setAuthUserId(int userId) {
         SecurityUtil.userId = userId;
-        return userId;
     }
 
     public static int authUserCaloriesPerDay() {

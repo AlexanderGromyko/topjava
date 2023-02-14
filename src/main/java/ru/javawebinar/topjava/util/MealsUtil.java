@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class MealsUtil {
     public static final int DEFAULT_CALORIES_PER_DAY = 2000;
-    public static final List<Meal> meals = Arrays.asList(
+    public static final List<Meal> meals1 = Arrays.asList(
             new Meal(LocalDateTime.of(2023, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
             new Meal(LocalDateTime.of(2023, Month.JANUARY, 30, 13, 0), "Обед", 1000),
             new Meal(LocalDateTime.of(2023, Month.JANUARY, 30, 20, 0), "Ужин", 500),
@@ -27,6 +27,19 @@ public class MealsUtil {
             new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 1, 11, 0), "Завтрак", 900),
             new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 1, 14, 0), "Обед", 520),
             new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 1, 21, 0), "Ужин", 500)
+    );
+
+    public static final List<Meal> meals2 = Arrays.asList(
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 12, 10, 0), "Завтрак", 400),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 12, 13, 0), "Обед", 900),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 12, 20, 0), "Ужин", 600),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 12, 0, 0), "Еда на граничное значение", 100),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 13, 10, 0), "Завтрак", 1100),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 13, 13, 0), "Обед", 550),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 13, 20, 0), "Ужин", 210),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 13, 11, 0), "Завтрак", 700),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 14, 14, 0), "Обед", 320),
+            new Meal(LocalDateTime.of(2023, Month.FEBRUARY, 14, 21, 0), "Ужин", 150)
     );
 
     public static List<MealTo> getTos(Collection<Meal> meals, int caloriesPerDay) {
