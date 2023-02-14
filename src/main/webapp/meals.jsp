@@ -24,7 +24,7 @@
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <form method="get" action="meals">
-        <input type="date" value="${startDate}" name="startDate">
+        <input type="date" value="" name="startDate">
         <input type="date" value="${endDate}" name="endDate">
         <input type="time" value="${startTime}" name="startTime">
         <input type="time" value="${endTime}" name="endTime">

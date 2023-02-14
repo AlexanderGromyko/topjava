@@ -27,11 +27,10 @@ public class MealRestController {
     private MealService service;
 
     public List<MealTo> getAllFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
-        return getAll()
-                .stream().filter(m -> DateTimeUtil.isBetweenHalfOpen(m.getDate()
+        return MealsUtil.getTos(service.getAllFiltered(authUserId()
                         , startDate != null ? startDate : LocalDate.MIN
-                        , endDate != null ? endDate : LocalDate.MAX)
-                        && DateTimeUtil.isBetweenHalfOpen(m.getTime()
+                        , endDate != null ? endDate : LocalDate.MAX), authUserCaloriesPerDay()).stream()
+                .filter(m -> DateTimeUtil.isBetweenHalfOpen(m.getTime()
                         , startTime != null ? startTime : LocalTime.MIN
                         , endTime != null ? endTime : LocalTime.MAX))
                 .collect(Collectors.toList());
