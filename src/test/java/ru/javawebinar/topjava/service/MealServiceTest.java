@@ -1,0 +1,83 @@
+package ru.javawebinar.topjava.service;
+
+import org.junit.runner.RunWith;
+import org.slf4j.bridge.SLF4JBridgeHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@ContextConfiguration({
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-db.xml"
+})
+@RunWith(SpringRunner.class)
+@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+public class MealServiceTest {
+    static {
+        // Only for postgres driver logging
+        // It uses java.util.logging and logged via jul-to-slf4j bridge
+        SLF4JBridgeHandler.install();
+    }
+
+    @Autowired
+    private MealService service;
+
+//    @Test
+//    public void create() {
+//        Meal created = service.create(getNew(), USER_ID);
+//        Integer newId = created.getId();
+//        Meal newMeal = getNew();
+//        newUser.setId(newId);
+//        assertMatch(created, newUser);
+//        assertMatch(service.get(newId), newUser);
+//    }
+//
+//    @Test
+//    public void duplicateMailCreate() {
+//        assertThrows(DataAccessException.class, () ->
+//                service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER)));
+//    }
+//
+//    @Test
+//    public void delete() {
+//        service.delete(USER_ID);
+//        assertThrows(NotFoundException.class, () -> service.get(USER_ID));
+//    }
+//
+//    @Test
+//    public void deletedNotFound() {
+//        assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND));
+//    }
+//
+//    @Test
+//    public void get() {
+//        User user = service.get(USER_ID);
+//        assertMatch(user, UserTestData.user);
+//    }
+//
+//    @Test
+//    public void getNotFound() {
+//        assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND));
+//    }
+//
+//    @Test
+//    public void getByEmail() {
+//        User user = service.getByEmail("admin@gmail.com");
+//        assertMatch(user, admin);
+//    }
+//
+//    @Test
+//    public void update() {
+//        User updated = getUpdated();
+//        service.update(updated);
+//        assertMatch(service.get(USER_ID), getUpdated());
+//    }
+//
+//    @Test
+//    public void getAll() {
+//        List<User> all = service.getAll();
+//        assertMatch(all, admin, guest, user);
+//    }
+}
