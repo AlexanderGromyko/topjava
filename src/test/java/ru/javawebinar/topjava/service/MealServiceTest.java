@@ -35,33 +35,35 @@ public class MealServiceTest {
 
     @Test
     public void get() {
-        Meal meal = service.get(meal1.getId(), USER_ID);
-        assertMatch(meal, meal1);
+        Meal meal = service.get(user_meal1.getId(), USER_ID);
+        assertMatch(meal, user_meal1);
     }
 
     @Test
     public void delete() {
-        service.delete(meal2.getId(), USER_ID);
-        assertThrows(NotFoundException.class, () -> service.get(meal2.getId(), USER_ID));
+        service.delete(user_meal2.getId(), USER_ID);
+        assertThrows(NotFoundException.class, () -> service.get(user_meal2.getId(), USER_ID));
     }
 
     @Test
     public void getBetweenInclusive() {
         List<Meal> all = service.getBetweenInclusive(startDate, endDate, USER_ID);
-        assertMatch(all, meal3, meal2, meal1);
+        assertMatch(all, user_meal3, user_meal2);
     }
 
     public void getAll() {
         List<Meal> all = service.getAll(ADMIN_ID);
-        assertMatch(all, meal6, meal5, meal4);
+        assertMatch(all, admin_meal3, admin_meal2, admin_meal1);
     }
 
     @Test
     public void update() {
         Meal created = getNew();
-        created.setId(meal1.getId());
+        created.setId(user_meal1.getId());
+        Meal newMeal = getNew();
+        newMeal.setId(user_meal1.getId());
         service.update(created, USER_ID);
-        assertMatch(created, service.get(created.getId(), USER_ID));
+        assertMatch(newMeal, service.get(created.getId(), USER_ID));
     }
 
     @Test
@@ -75,24 +77,23 @@ public class MealServiceTest {
     }
 
     public void getForWrongUser() {
-        assertThrows(NotFoundException.class, () -> service.get(meal1.getId(), ADMIN_ID));
+        assertThrows(NotFoundException.class, () -> service.get(user_meal1.getId(), ADMIN_ID));
     }
 
     @Test
     public void deleteForWrongUser() {
-        assertThrows(NotFoundException.class, () -> service.delete(meal2.getId(), ADMIN_ID));
+        assertThrows(NotFoundException.class, () -> service.delete(user_meal2.getId(), ADMIN_ID));
     }
 
     @Test
     public void updateForWrongUser() {
-        assertThrows(NotFoundException.class, () -> service.update(meal1, ADMIN_ID));
+        assertThrows(NotFoundException.class, () -> service.update(user_meal1, ADMIN_ID));
     }
 
     @Test
     public void duplicateMealCreate() {
-        Meal created = service.create(getNew(), USER_ID);
-        created.setDateTime(meal1.getDateTime());
-        assertThrows(DataAccessException.class, () -> service.update(created, USER_ID));
+        Meal newMeal = getNew();
+        newMeal.setDateTime(user_meal1.getDateTime());
+        assertThrows(DataAccessException.class, () -> service.create(newMeal, USER_ID));
     }
-//5.2 Сделать тесты на чужую еду (delete, get, update) с тем, чтобы получить NotFoundException и duplicateDateTimeCreate, аналогичный duplicateMailCreate.
 }

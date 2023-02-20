@@ -71,8 +71,8 @@ public class JdbcMealRepository implements MealRepository {
     public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("userId", userId)
-                .addValue("start_datetime", startDateTime == null ? LocalDateTime.MIN : startDateTime)
-                .addValue("end_datetime", endDateTime == null ? LocalDateTime.MAX : endDateTime);
+                .addValue("start_datetime", startDateTime)
+                .addValue("end_datetime", endDateTime);
         return namedParameterJdbcTemplate.query("SELECT * FROM meals WHERE user_id=:userId " +
                 "AND datetime>=:start_datetime AND datetime<:end_datetime ORDER BY datetime DESC", map, ROW_MAPPER);
     }
