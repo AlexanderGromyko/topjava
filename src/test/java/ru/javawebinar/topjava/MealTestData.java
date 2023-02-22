@@ -16,8 +16,8 @@ public class MealTestData {
     public static final Meal adminMeal1 = new Meal(START_SEQ + 6, LocalDateTime.of(2023, 2, 20, 10, 0), "Завтрак", 700);
     public static final Meal adminMeal2 = new Meal(START_SEQ + 7, LocalDateTime.of(2023, 2, 20, 13, 0), "Обед", 1500);
     public static final Meal adminMeal3 = new Meal(START_SEQ + 8, LocalDateTime.of(2023, 2, 20, 19, 0), "Ужин", 150);
-    public static final LocalDate startDate = LocalDate.of(2023, 2, 19);
-    public static final LocalDate endDate = LocalDate.of(2023, 2, 19);
+    public static final LocalDate START_DATE = LocalDate.of(2023, 2, 19);
+    public static final LocalDate END_DATE = LocalDate.of(2023, 2, 19);
     public static final int NOT_EXISTS_MEAL_ID = START_SEQ + 1000;
 
     public static Meal getNew() {

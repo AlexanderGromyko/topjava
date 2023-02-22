@@ -21,6 +21,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-common.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringRunner.class)
@@ -49,7 +50,7 @@ public class MealServiceTest {
 
     @Test
     public void getBetweenInclusive() {
-        List<Meal> all = service.getBetweenInclusive(startDate, endDate, USER_ID);
+        List<Meal> all = service.getBetweenInclusive(START_DATE, END_DATE, USER_ID);
         assertMatch(all, userMeal3, userMeal2);
     }
 
@@ -88,7 +89,8 @@ public class MealServiceTest {
 
     @Test
     public void updateForWrongUser() {
-        assertThrows(NotFoundException.class, () -> service.update(userMeal1, ADMIN_ID));
+        Meal updated = getUpdatedMealBelongsToUser();
+        assertThrows(NotFoundException.class, () -> service.update(updated, ADMIN_ID));
     }
 
     @Test
