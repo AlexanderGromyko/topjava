@@ -18,7 +18,7 @@ public class SpringMain {
     public static void main(String[] args) {
         // java 7 automatic resource management (ARM)
         try (AbstractRefreshableConfigApplicationContext appCtx = new ClassPathXmlApplicationContext()) {
-            appCtx.getEnvironment().setActiveProfiles("jpa", "postgres");
+            appCtx.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
             appCtx.setConfigLocations("spring/spring-app.xml" , "spring/spring-db.xml");
             appCtx.refresh();
 
