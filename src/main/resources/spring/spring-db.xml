@@ -95,6 +95,7 @@
               p:url="${database.url}"
               p:username="${database.username}"
               p:password="${database.password}"/>
+
         <bean class="ru.javawebinar.topjava.repository.JpaUtil"/>
     </beans>
 
