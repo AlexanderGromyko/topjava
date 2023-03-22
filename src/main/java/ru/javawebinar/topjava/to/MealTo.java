@@ -41,6 +41,10 @@ public class MealTo {
         return excess;
     }
 
+    public boolean getExcess() {
+        return excess;
+    }
+
     @Override
     public String toString() {
         return "MealTo{" +
