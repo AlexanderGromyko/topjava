@@ -1,8 +1,8 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.to.MealTo;
 
-import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -12,6 +12,7 @@ import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class MealTestData {
     public static final MatcherFactory.Matcher<Meal> MEAL_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Meal.class, "user");
+    public static MatcherFactory.Matcher<MealTo> TO_MATCHER = MatcherFactory.usingEqualsComparator(MealTo.class);
 
     public static final int NOT_FOUND = 10;
     public static final int MEAL1_ID = START_SEQ + 3;
@@ -31,10 +32,6 @@ public class MealTestData {
 
     public static Meal getNew() {
         return new Meal(null, of(2020, Month.FEBRUARY, 1, 18, 0), "Созданный ужин", 300);
-    }
-
-    public static Meal getEmpty() {
-        return  new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
     }
 
     public static Meal getUpdated() {
