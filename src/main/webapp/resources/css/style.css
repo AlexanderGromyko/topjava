@@ -44,6 +44,6 @@ body {
     background-color: #f5f5f5;
 }
 
-#mealsBlock {
-    margin-left: 0px;
+tr[data-user-enabled="false"] {
+    opacity: 0.3;
 }
