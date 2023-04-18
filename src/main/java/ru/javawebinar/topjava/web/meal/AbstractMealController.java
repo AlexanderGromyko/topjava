@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.validation.BindingResult;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
@@ -48,7 +49,7 @@ public abstract class AbstractMealController {
         return service.create(meal, userId);
     }
 
-    public void update(Meal meal, int id) {
+    public void update(Meal meal, int id, BindingResult result) {
         int userId = SecurityUtil.authUserId();
         log.info("update {} for user {}", meal, userId);
         assureIdConsistent(meal, id);
