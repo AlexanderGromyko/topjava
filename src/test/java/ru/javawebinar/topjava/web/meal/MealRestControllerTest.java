@@ -87,7 +87,7 @@ class MealRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL + MEAL1_ID).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(invalidUpdated)))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
