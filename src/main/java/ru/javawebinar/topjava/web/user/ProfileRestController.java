@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
-import ru.javawebinar.topjava.util.ValidationUtil;
-import ru.javawebinar.topjava.util.exception.IllegalRequestDataException;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -34,10 +32,7 @@ public class ProfileRestController extends AbstractUserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo, BindingResult result) {
-        if (result.hasErrors()) {
-            throw new IllegalRequestDataException(ValidationUtil.getErrorResponse(result).getBody());
-        }
+    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo, BindingResult errors) {
         User created = super.create(userTo);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL).build().toUri();
@@ -46,10 +41,7 @@ public class ProfileRestController extends AbstractUserController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody UserTo userTo, BindingResult result) {
-        if (result.hasErrors()) {
-            throw new IllegalRequestDataException(ValidationUtil.getErrorResponse(result).getBody());
-        }
+    public void update(@Valid @RequestBody UserTo userTo, BindingResult errors) {
         super.update(userTo, authUserId());
     }
 
