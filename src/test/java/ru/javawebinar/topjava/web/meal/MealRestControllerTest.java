@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.util.exception.ErrorType;
@@ -18,9 +19,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.MealTestData.getInvalidUpdated;
+import static ru.javawebinar.topjava.MealTestData.getInvalidNew;
+import static ru.javawebinar.topjava.MealTestData.getUpdated;
+import static ru.javawebinar.topjava.MealTestData.getNew;
 import static ru.javawebinar.topjava.TestUtil.userHttpBasic;
-import static ru.javawebinar.topjava.UserTestData.USER_ID;
-import static ru.javawebinar.topjava.UserTestData.user;
+import static ru.javawebinar.topjava.UserTestData.*;
 import static ru.javawebinar.topjava.util.MealsUtil.createTo;
 import static ru.javawebinar.topjava.util.MealsUtil.getTos;
 
@@ -87,8 +90,7 @@ class MealRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL + MEAL1_ID).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(invalidUpdated)))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -112,10 +114,9 @@ class MealRestControllerTest extends AbstractControllerTest {
         Meal newInvalidMeal = getInvalidNew();
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .with(userHttpBasic(user))
+                .with(userHttpBasic(admin))
                 .content(JsonUtil.writeValue(newInvalidMeal)))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test

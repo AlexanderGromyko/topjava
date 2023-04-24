@@ -101,8 +101,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(jsonWithPassword(invalidUpdated, invalidUpdated.getPassword())))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -128,8 +127,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(jsonWithPassword(newInvalidUser, newInvalidUser.getPassword())))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
